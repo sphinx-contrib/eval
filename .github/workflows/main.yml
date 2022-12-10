@@ -46,7 +46,7 @@ jobs:
           pip install -e '.[dev]'
       - name: Test
         run: |
-          pytest --cov .
+          pytest --cov
       - name: Test for macOS and Linux
         if: runner.os != 'Windows'
         run: |
