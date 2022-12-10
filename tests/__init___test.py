@@ -11,7 +11,7 @@ class Test(AppMixin, TestCase):
     """Test."""
 
     def test_eval_sh(self) -> None:
-        """test_eval_sh.
+        """Test eval sh.
 
         :rtype: None
         """
@@ -21,7 +21,7 @@ class Test(AppMixin, TestCase):
         assert rst == ""
 
     def test_eval_python(self) -> None:
-        """test_eval_python.
+        """Test eval python.
 
         :rtype: None
         """
@@ -31,6 +31,6 @@ class Test(AppMixin, TestCase):
         assert rst == str(sys.version_info)
 
     def test_setup(self):
-        """test_setup."""
+        """Test setup."""
         app = self.app
         assert app.env.config.eval_funcs == {"sh": eval_sh}  # type: ignore

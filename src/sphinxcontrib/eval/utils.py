@@ -12,7 +12,7 @@ def get_lang_map(
     template: str,
     eval_funcs: dict[str, Callable[[str], str]],
 ) -> dict[str, tuple[re.Pattern, Callable[[str], str]]]:
-    """get_lang_map.
+    """Get lang map.
 
     :param template:
     :type template: str
@@ -31,7 +31,7 @@ def get_lang_map(
 def replace(
     inputstring: str, pat: re.Pattern, eval_func: Callable[[str], str]
 ) -> str:
-    """replace.
+    """Replace.
 
     :param inputstring:
     :type inputstring: str
@@ -51,7 +51,7 @@ def replace(
 
 
 def patch_parser(template: str, parser: Type[Parser]) -> Type[Parser]:
-    """patch_parser.
+    """Patch parser.
 
     :param template:
     :type template: str

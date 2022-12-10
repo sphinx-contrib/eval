@@ -12,6 +12,9 @@ try:
 except ImportError:
     import tomli as tomllib
 
+scriptdir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "scripts")
+os.environ["PATH"] = scriptdir + os.path.pathsep + os.getenv("PATH", "")
+
 # -- Path setup --------------------------------------------------------------
 
 # If extensions (or modules to document with autodoc) are in another directory,

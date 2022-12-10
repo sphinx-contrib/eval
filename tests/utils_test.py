@@ -7,7 +7,7 @@ TEMPLATE = r"""`!LANG (.*?)`"""
 
 
 def eval_dummy(input: str) -> str:
-    """eval_dummy.
+    """Eval dummy.
 
     :param input:
     :type input: str
@@ -25,7 +25,7 @@ class Test:
     """Test."""
 
     def test_get_lang_map(self) -> None:
-        """test_get_lang_map.
+        """Test get lang map.
 
         :rtype: None
         """
@@ -34,7 +34,7 @@ class Test:
         assert rst == expected
 
     def test_replace(self) -> None:
-        """test_replace.
+        """Test replace.
 
         :rtype: None
         """

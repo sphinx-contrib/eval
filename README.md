@@ -65,7 +65,7 @@ For myst:
 
 ````markdown
 ```{eval-sh}
-echo My OS is $OSTYPE
+echo My OS is $OSTYPE.
 ```
 ````
 
@@ -73,7 +73,7 @@ For rst:
 
 ```rst
 .. eval-sh::
-    echo My OS is $OSTYPE
+    echo My OS is $OSTYPE.
 
 ```
 
@@ -86,12 +86,13 @@ sphinx-build docs docs/_build/html
 Result:
 
 ```text
-My OS is linux-gnu
+My OS is linux-gnu.
 ```
 
 ### Advanced Usages
 
-All the following code is myst. The corresponding rst is similar.
+All of the following examples are myst. The corresponding examples of rst are
+similar. Remember to add `scripts` to your `$PATH` in `docs/conf.py`.
 Click the hyperlink of title to see the actual example.
 
 #### [Generate API Document](https://github.com/Freed-Wu/translate-shell/tree/main/docs/api/translate_shell.md)
@@ -117,23 +118,24 @@ Now
 
 ````{eval-rst}
 ```{eval-sh}
-scripts/generate-api.md.sh '' -maxdepth 1
+generate-api.md.sh '' -maxdepth 1
 ```
 ````
 `````
 
 Where `scripts/generate-api.md.sh` is a script which search all python file and
-replace them from `src/translate_shell/X/Y/Z.py` to
+replace them from `src/translate_shell/XXX.py` to
 
 ```rst
-.. automodule:: translate_shell.X.Y.Z`
+.. automodule:: translate_shell.XXX
     :members:
 ```
 
 ```bash
 #!/usr/bin/env bash
 # shellcheck disable=SC2086
-find src/sphinxcontrib/eval/$1 $2 $3 -name '*.py' |
+cd "$(dirname "$(dirname "$0")")" || exit 1
+find src/translate_shell/$1 $2 $3 -name '*.py' |
 perl -pe's=src/=.. automodule:: =g;
 s=\.py$=\n    :members:=g;s=/__init__==g;s=/=.=g'
 ```
@@ -142,18 +144,17 @@ s=\.py$=\n    :members:=g;s=/__init__==g;s=/=.=g'
 
 Before:
 
-<!-- markdownlint-disable MD013-->
-
 ```markdown
 # TODO
 
-- <https://github.com/Freed-Wu/tranlate-shell/tree/main/src/translate_shell/translators/stardict/__init__.py#L4> more stardicts.
-- <https://github.com/Freed-Wu/tranlate-shell/tree/main/src/translate_shell/translators/stardict/__init__.py#L5> Create different subclasses for different dict to get phonetic, explains
-- <https://github.com/Freed-Wu/tranlate-shell/tree/main/src/translate_shell/ui/repl.py#L33> make the last line gray like ptpython
-  ...
+- <https://github.com/Freed-Wu/tranlate-shell/tree/main/src/translate_shell/translators/stardict/__init__.py#L4>
+  more stardicts.
+- <https://github.com/Freed-Wu/tranlate-shell/tree/main/src/translate_shell/translators/stardict/__init__.py#L5>
+  Create different subclasses for different dict to get phonetic, explains
+- <https://github.com/Freed-Wu/tranlate-shell/tree/main/src/translate_shell/ui/repl.py#L33>
+  make the last line gray like ptpython
+- ...
 ```
-
-<!-- markdownlint-enable MD013-->
 
 Now:
 
@@ -161,19 +162,22 @@ Now:
 # TODO
 
 ```{eval-sh}
-scripts/generate-todo.md.sh
+generate-todo.md.sh
 ```
 ````
 
-Where the script searches all `TODO`s in code then convert them to correct hyperlinks.
+Where `scripts/generate-todo.md.sh` searches all `TODO`s in code then convert
+them to correct hyperlinks.
 
 ```sh
-grep -RIn TODO: src | perl -pe's/:/#L/;s/:\s*#?\s*TODO:\s*/ /;
+#!/usr/bin/env bash
+cd "$(dirname "$(dirname "$0")")" || exit 1
+grep -RIn TODO: src | perl -pe's/:/#L/;s/:\s*#?\s*TODO:\s*/  /;
 s=^=- https://github.com/Freed-Wu/tranlate-shell/tree/main/=g;
-s=(https://\S+)=<\1>=g'
+s=(https://\S+)=<\1>=g;s=^(- \S+)=\1\n=g'
 ```
 
-#### [Generate Requirement Document](https://github.com/Freed-Wu/translate-shell/tree/main/docs/resources/requirements.md)
+#### [Generate Requirements Document](https://github.com/Freed-Wu/translate-shell/tree/main/docs/resources/requirements.md)
 
 Before:
 
@@ -195,22 +199,23 @@ Now
 # Requirements
 
 ```{eval-sh}
-scripts/generate-requirements.md.sh
+generate-requirements.md.sh
 ```
 ````
 
-Where
+Where `scripts/generate-requirements.md.sh` searches all `requirements/*.txt`s:
 
 ```bash
 #!/usr/bin/env bash
-for file in requirements.txt requirements/*.txt ; do
+cd "$(dirname "$(dirname "$0")")" || exit 1
+for file in requirements/*.txt ; do
     filename="${file##*/}"
     perl -pe's=^([^#\n]\S*)=- [\1](https://pypi.org/project/\1)=g;
     s/^#\s*//g;s/^!.*/## '"${filename%%.txt}"'/g' < "$file"
 done
 ```
 
-And `requirements/completion.txt`:
+And `requirements/completion.txt` is:
 
 ```unixconfig
 #!/usr/bin/env -S pip install -r

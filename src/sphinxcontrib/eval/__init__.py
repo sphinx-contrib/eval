@@ -19,7 +19,7 @@ SH = os.getenv("SHELL", "sh")
 
 
 def eval_sh(input: str) -> str:
-    """eval_sh.
+    """Eval sh.
 
     :param input:
     :type input: str
@@ -35,7 +35,7 @@ def eval_sh(input: str) -> str:
 
 
 def eval_python(input: str) -> str:
-    """eval_python.
+    """Eval python.
 
     :param input:
     :type input: str

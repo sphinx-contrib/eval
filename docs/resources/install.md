@@ -10,6 +10,12 @@ pip install sphinxcontrib-eval
 pip uninstall sphinxcontrib-eval
 ```
 
-## AUR
+## [AUR](https://aur.archlinux.org/packages/python-sphinxcontrib-eval)
 
-Not yet.
+```sh
+yay -S python-sphinxcontrib-eval
+```
+
+```sh
+sudo pacman -R python-sphinxcontrib-eval
+```

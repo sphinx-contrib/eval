@@ -37,6 +37,9 @@ Source = "https://github.com/Freed-Wu/sphinxcontrib-eval"
 [tool.setuptools_scm]
 write_to = "src/sphinxcontrib/eval/_version.py"
 
+[tool.setuptools.package-data]
+"sphinxcontrib.eval" = ["py.typed"]
+
 [tool.setuptools.dynamic]
 dependencies = { file = "requirements.txt" }
 
@@ -55,19 +58,14 @@ profile = "black"
 [tool.pydocstyle]
 add_ignore = "D205, D400"
 
+[tool.doq]
+template_path = "templates"
+
 [tool.bandit]
-skips = [
-    "B404",
-]
+skips = ["B404"]
 
 [tool.bandit.assert_used]
-skips = [
-    "tests/*.py",
-    "*_test.py",
-    "test_*.py",
-]
+skips = ["tests/*.py", "*_test.py", "test_*.py"]
 
 [tool.coverage.report]
-exclude_lines = [
-  "if TYPE_CHECKING:"
-]
+exclude_lines = ["if TYPE_CHECKING:", "if __name__ == .__main__.:"]

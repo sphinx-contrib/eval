@@ -1,6 +1,5 @@
 """Provide ``AppMixin``."""
 import os
-import os.path
 import shutil
 import tempfile
 from functools import update_wrapper
@@ -15,7 +14,7 @@ class Lazy:
     """Lazy."""
 
     def __init__(self, func, name=None):
-        """__init__.
+        """Init.
 
         :param func:
         :param name:
@@ -26,7 +25,7 @@ class Lazy:
         update_wrapper(self, func)
 
     def __get__(self, inst, class_):
-        """__get__.
+        """Get.
 
         :param inst:
         :param class_:
@@ -45,7 +44,7 @@ CONF_PY = Path("tests/conf.py").read_text()
 
 
 def _find_duplicate_default_nodes():
-    """_find_duplicate_default_nodes."""
+    """Find duplicate default nodes."""
     from sphinx import addnodes
 
     class App:
@@ -73,7 +72,7 @@ def _find_duplicate_default_nodes():
 
 
 class AppMixin:
-    """AppMixin."""
+    """Appmixin."""
 
     #: The contents of the main 'doc.rst' document.
     #:
@@ -106,20 +105,20 @@ class AppMixin:
                 delattr(nodes.GenericNodeVisitor, "visit_" + node)
 
     def tearDown(self):
-        """tearDown."""
+        """Tear down."""
         directives._directives = self.directives  # type: ignore
         roles._roles = self.roles  # type: ignore
 
     @Lazy
     def tmpdir(self):
-        """tmpdir."""
+        """Tmpdir."""
         d = tempfile.mkdtemp()
         self.addCleanup(shutil.rmtree, d)  # type: ignore
         return d
 
     @Lazy
     def srcdir(self):
-        """Generate source directory for test Sphinx application."""
+        """Srcdir."""
         tmpdir = self.tmpdir
         srcdir = os.path.join(tmpdir, "src")  # type: ignore
         os.mkdir(srcdir)
@@ -152,22 +151,22 @@ class AppMixin:
 
     @Lazy
     def outdir(self):
-        """outdir."""
+        """Outdir."""
         return os.path.join(self.tmpdir, "html")  # type: ignore
 
     @Lazy
     def doctreedir(self):
-        """doctreedir."""
+        """Doctreedir."""
         return os.path.join(self.tmpdir, "doctrees")  # type: ignore
 
     @Lazy
     def confoverrides(self):
-        """confoverrides."""
+        """Confoverrides."""
         return {}
 
     @Lazy
     def app(self):
-        """Sphinx application for the current test."""
+        """App."""
         srcdir = self.srcdir
         outdir = self.outdir
         doctreedir = self.doctreedir
@@ -191,18 +190,18 @@ class AppMixin:
         return app
 
     @Lazy
-    def build_app(self):  # pylint:disable=method-hidden
-        """build_app."""
+    def build_app(self):
+        """Build app."""
         return False
 
     @Lazy
     def ignore_warnings(self):
-        """ignore_warnings."""
+        """Ignore warnings."""
         return True
 
     @Lazy
     def doctree(self):
-        """doctree."""
+        """Doctree."""
         getattr(self, "build_app")
         self.build_app = True  # type: ignore
         app = self.app

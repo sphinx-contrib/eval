@@ -1,5 +1,5 @@
 # Requirements
 
 ```{eval-sh}
-scripts/generate-requirements.md.sh
+generate-requirements.md.sh
 ```
