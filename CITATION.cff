@@ -1,3 +1,4 @@
+#!/usr/bin/env -S scripts/generate-CITATION.cff.pl pyproject.toml
 ---
 cff-version: 1.2.0
 message: If you use this software, please cite it as below.
@@ -5,7 +6,6 @@ authors:
   - family-names: Wu
     given-names: Zhenyu
     orcid: https://orcid.org/0000-0001-6478-9993
-title: >-
-  sphinxcontrib-eval: Evaluate shell command or python code in sphinx and myst
+title: "%HERE%"
 date-released: 2022-12-10
 url: https://github.com/Freed-Wu/sphinxcontrib-eval
