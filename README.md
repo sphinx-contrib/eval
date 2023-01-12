@@ -89,11 +89,28 @@ Result:
 My OS is linux-gnu.
 ```
 
+**NOTE:** the current working directory depends on you. That is, if you run
+`cd docs && sphinx-build . _build/html && cd -`, CWD will be `docs`, which is
+the default setting of <https://readthedocs.org>. So if your code structure is
+like
+
+```console
+$ tree --level 1
+ .
+├──  docs
+├──  scripts
+├──  src
+└──  tests
+```
+
+And you want to run `scripts/*.sh`, you need `cd ..` firstly from `docs` to
+`.` else you have to run `../scripts/*.sh`.
+
 ### Advanced Usages
 
 All of the following examples are myst. The corresponding examples of rst are
-similar. Remember to add `scripts` to your `$PATH` in `docs/conf.py`.
-Click the hyperlink of title to see the actual example.
+similar. Click the hyperlinks of the titles and scripts to see the actual
+examples.
 
 #### [Generate API Document](https://github.com/Freed-Wu/translate-shell/tree/main/docs/api/translate_shell.md)
 
@@ -118,26 +135,19 @@ Now
 
 ````{eval-rst}
 ```{eval-sh}
-generate-api.md.sh '' -maxdepth 1
+cd ..
+scripts/generate-api.md.pl src/*/*.py
 ```
 ````
 `````
 
-Where `scripts/generate-api.md.sh` is a script which search all python file and
-replace them from `src/translate_shell/XXX.py` to
+Where
+[`scripts/generate-api.md.pl`](https://github.com/Freed-Wu/translate-shell/blob/main/scripts/generate-api.md.pl)
+replaces all `src/translate_shell/XXX.py` to
 
 ```rst
 .. automodule:: translate_shell.XXX
     :members:
-```
-
-```bash
-#!/usr/bin/env bash
-# shellcheck disable=SC2086
-cd "$(dirname "$(dirname "$0")")" || exit 1
-find src/translate_shell/$1 $2 $3 -name '*.py' |
-perl -pe's=src/=.. automodule:: =g;
-s=\.py$=\n    :members:=g;s=/__init__==g;s=/=.=g'
 ```
 
 #### [Generate TODO Document](https://github.com/Freed-Wu/translate-shell/tree/main/docs/misc/todo.md)
@@ -156,26 +166,20 @@ Before:
 - ...
 ```
 
-Now:
+Now: (notice `eval-bash` because readthedocs uses dash as their default `$SHELL`)
 
 ````markdown
 # TODO
 
-```{eval-sh}
-generate-todo.md.sh
+```{eval-bash}
+cd ..
+scripts/generate-todo.md.pl src/**/*
 ```
 ````
 
-Where `scripts/generate-todo.md.sh` searches all `TODO`s in code then convert
-them to correct hyperlinks.
-
-```sh
-#!/usr/bin/env bash
-cd "$(dirname "$(dirname "$0")")" || exit 1
-grep -RIn TODO: src | perl -pe's/:/#L/;s/:\s*#?\s*TODO:\s*/  /;
-s=^=- https://github.com/Freed-Wu/tranlate-shell/tree/main/=g;
-s=(https://\S+)=<\1>=g;s=^(- \S+)=\1\n=g'
-```
+Where
+[`scripts/generate-todo.md.pl`](https://github.com/Freed-Wu/translate-shell/blob/main/scripts/generate-todo.md.pl)
+searches all `TODO`s in code then convert them to correct hyperlinks.
 
 #### [Generate Requirements Document](https://github.com/Freed-Wu/translate-shell/tree/main/docs/resources/requirements.md)
 
@@ -199,23 +203,14 @@ Now
 # Requirements
 
 ```{eval-sh}
-generate-requirements.md.sh
+cd ..
+generate-requirements.md.pl
 ```
 ````
 
-Where `scripts/generate-requirements.md.sh` searches all `requirements/*.txt`s:
-
-```bash
-#!/usr/bin/env bash
-cd "$(dirname "$(dirname "$0")")" || exit 1
-for file in requirements/*.txt ; do
-    filename="${file##*/}"
-    perl -pe's=^([^#\n]\S*)=- [\1](https://pypi.org/project/\1)=g;
-    s/^#\s*//g;s/^!.*/## '"${filename%%.txt}"'/g' < "$file"
-done
-```
-
-And `requirements/completion.txt` is:
+Where
+[`scripts/generate-requirements.md.pl`](https://github.com/Freed-Wu/translate-shell/blob/main/scripts/generate-requirements.md.pl)
+searches all `requirements/*.txt`s and `requirements/completion.txt` is:
 
 ```unixconfig
 #!/usr/bin/env -S pip install -r

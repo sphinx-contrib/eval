@@ -34,6 +34,22 @@ def eval_sh(input: str) -> str:
     return output
 
 
+def eval_bash(input: str) -> str:
+    """Eval bash.
+
+    :param input:
+    :type input: str
+    :rtype: str
+    """
+    try:
+        output = check_output(  # nosec B603 B607
+            ["bash", "-c", input], universal_newlines=True
+        )
+    except Exception:
+        output = ""
+    return output
+
+
 def eval_python(input: str) -> str:
     """Eval python.
 
@@ -52,7 +68,7 @@ def eval_python(input: str) -> str:
     return output
 
 
-EVAL_FUNCS = {"sh": eval_sh, "python": eval_python}
+EVAL_FUNCS = {"sh": eval_sh, "bash": eval_bash, "python": eval_python}
 
 
 def setup(app: Sphinx) -> dict[str, Any]:

@@ -31,16 +31,9 @@ jobs:
         with:
           python-version: ${{ env.python-version }}
           cache: ${{ env.cache }}
-      - name: Install dependencies for macOS
-        if: runner.os == 'macOS'
-        run: |
-          brew update
-          brew install shellcheck shfmt
-      - name: Install dependencies for Linux
-        if: runner.os == 'Linux'
-        run: |
-          sudo apt update
-          sudo apt install shfmt
+          cache-dependency-path: |-
+            requirements.txt
+            requirements/dev.txt
       - name: Install dependencies
         run: |
           pip install -e '.[dev]'
@@ -68,6 +61,9 @@ jobs:
         with:
           python-version: ${{ env.python-version }}
           cache: ${{ env.cache }}
+          cache-dependency-path: |-
+            requirements.txt
+            requirements/dev.txt
       - name: Install dependencies
         run: |
           pip install build

@@ -1,5 +1,6 @@
 # Requirements
 
 ```{eval-sh}
-generate-requirements.md.sh
+cd ..
+generate-requirements.md.pl requirements/*.txt
 ```

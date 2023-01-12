@@ -2,6 +2,7 @@
 
 ````{eval-rst}
 ```{eval-sh}
-generate-api.md.sh
+cd ..
+generate-api.md.pl src/*/*/*.py
 ```
 ````
