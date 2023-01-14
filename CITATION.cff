@@ -6,6 +6,6 @@ authors:
   - family-names: Wu
     given-names: Zhenyu
     orcid: https://orcid.org/0000-0001-6478-9993
-title: "%HERE%"
+title: "sphinxcontrib-eval: Evaluate shell command or python code in sphinx and myst"
 date-released: 2022-12-10
-url: https://github.com/Freed-Wu/sphinxcontrib-eval
+url: "https://github.com/sphinx-contrib/eval"

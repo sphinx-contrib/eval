@@ -30,9 +30,9 @@ dynamic = ["version", "dependencies", "optional-dependencies"]
 
 [project.urls]
 Homepage = "https://sphinxcontrib-eval.readthedocs.io"
-Download = "https://github.com/Freed-Wu/sphinxcontrib-eval/releases"
-"Bug Report" = "https://github.com/Freed-Wu/sphinxcontrib-eval/issues"
-Source = "https://github.com/Freed-Wu/sphinxcontrib-eval"
+Download = "https://github.com/sphinx-contrib/eval/releases"
+"Bug Report" = "https://github.com/sphinx-contrib/eval/issues"
+Source = "https://github.com/sphinx-contrib/eval"
 
 [tool.setuptools_scm]
 write_to = "src/sphinxcontrib/eval/_version.py"
