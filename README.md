@@ -143,7 +143,7 @@ scripts/generate-api.md.pl src/*/*.py
 
 Where
 [`scripts/generate-api.md.pl`](https://github.com/Freed-Wu/translate-shell/blob/main/scripts/generate-api.md.pl)
-replaces all `src/translate_shell/XXX.py` to
+replaces all `src/translate_shell/XXX.py`s to
 
 ```rst
 .. automodule:: translate_shell.XXX
@@ -174,7 +174,7 @@ Now: (notice `eval-bash` because readthedocs uses dash as their default `$SHELL`
 ```{eval-bash}
 cd ..
 shopt -s globstar
-scripts/generate-todo.md.pl src/**/*
+scripts/generate-todo.md.pl src/**/*.py
 ```
 ````
 
