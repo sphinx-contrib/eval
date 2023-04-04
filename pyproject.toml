@@ -43,9 +43,13 @@ write_to = "src/sphinxcontrib/eval/_version.py"
 [tool.setuptools.dynamic]
 dependencies = { file = "requirements.txt" }
 
-[tool.setuptools.dynamic.optional-dependencies]
-dev = { file = "requirements/dev.txt" }
-myst = { file = "requirements/myst.txt" }
+# begin: scripts/update-pyproject.toml.pl
+[tool.setuptools.dynamic.optional-dependencies.dev]
+file = "requirements/dev.txt"
+
+[tool.setuptools.dynamic.optional-dependencies.myst]
+file = "requirements/myst.txt"
+# end: scripts/update-pyproject.toml.pl
 
 [tool.black]
 line-length = 79
