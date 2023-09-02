@@ -51,6 +51,9 @@ file = "requirements/dev.txt"
 file = "requirements/myst.txt"
 # end: scripts/update-pyproject.toml.pl
 
+[tool.mdformat]
+number = true
+
 [tool.black]
 line-length = 79
 

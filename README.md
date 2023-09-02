@@ -114,6 +114,9 @@ examples.
 
 #### [Generate API Document](https://github.com/Freed-Wu/translate-shell/tree/main/docs/api/translate_shell.md)
 
+**Note**: A more "sphinx" solution is
+[sphinxcontrib-autofile](https://github.com/sphinx-contrib/autofile).
+
 Before:
 
 ````markdown
@@ -142,7 +145,7 @@ scripts/generate-api.md.pl src/*/*.py
 `````
 
 Where
-[`scripts/generate-api.md.pl`](https://github.com/Freed-Wu/translate-shell/blob/main/scripts/generate-api.md.pl)
+[`scripts/generate-api.md.pl`](https://github.com/sphinx-contrib/eval/blob/main/scripts/generate-api.md.pl)
 replaces all `src/translate_shell/XXX.py`s to
 
 ```rst
@@ -184,6 +187,9 @@ searches all `TODO`s in code then convert them to correct hyperlinks.
 
 #### [Generate Requirements Document](https://github.com/Freed-Wu/translate-shell/tree/main/docs/resources/requirements.md)
 
+**Note**: A more "sphinx" solution is
+[sphinxcontrib-requirements-txt](https://github.com/sphinx-contrib/requirements-txt).
+
 Before:
 
 ```markdown
@@ -210,7 +216,7 @@ generate-requirements.md.pl
 ````
 
 Where
-[`scripts/generate-requirements.md.pl`](https://github.com/Freed-Wu/translate-shell/blob/main/scripts/generate-requirements.md.pl)
+[`scripts/generate-requirements.md.pl`](https://github.com/sphinx-contrib/eval/blob/main/scripts/generate-requirements.md.pl)
 searches all `requirements/*.txt`s and `requirements/completion.txt` is:
 
 ```unixconfig
