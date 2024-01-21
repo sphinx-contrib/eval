@@ -38,6 +38,10 @@
 
 Evaluate shell command or python code in sphinx and myst.
 
+## Install
+
+See [here](https://sphinxcontrib-eval.readthedocs.io/en/latest/resources/install.html).
+
 ## Usage
 
 ### Enable
