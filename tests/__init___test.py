@@ -1,10 +1,10 @@
 """Test ``__init__.py``."""
+
 import sys
 from shutil import which
 from unittest import TestCase
 
 import pytest
-
 from sphinxcontrib.eval import eval_bash, eval_python, eval_sh
 
 from . import AppMixin

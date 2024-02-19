@@ -6,11 +6,9 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "sphinxcontrib-eval"
 description = "Evaluate shell command or python code in sphinx and myst"
-authors = [{ name = "Wu Zhenyu", email = "wuzhenyu@ustc.edu" }]
 readme = "README.md"
 requires-python = ">= 3.9"
 keywords = ["sphinx", "myst", "eval"]
-license = { text = "GPL v3" }
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Developers",
@@ -25,8 +23,18 @@ classifiers = [
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dynamic = ["version", "dependencies", "optional-dependencies"]
+
+[[project.authors]]
+name = "Wu Zhenyu"
+email = "wuzhenyu@ustc.edu"
+
+[project.license]
+text = "GPL v3"
 
 [project.urls]
 Homepage = "https://sphinxcontrib-eval.readthedocs.io"
@@ -40,8 +48,8 @@ write_to = "src/sphinxcontrib/eval/_version.py"
 [tool.setuptools.package-data]
 "sphinxcontrib.eval" = ["py.typed"]
 
-[tool.setuptools.dynamic]
-dependencies = { file = "requirements.txt" }
+[tool.setuptools.dynamic.dependencies]
+file = "requirements.txt"
 
 # begin: scripts/update-pyproject.toml.pl
 [tool.setuptools.dynamic.optional-dependencies.dev]
@@ -54,25 +62,37 @@ file = "requirements/myst.txt"
 [tool.mdformat]
 number = true
 
-[tool.black]
-line-length = 79
-
-[tool.isort]
-line_length = 79
-profile = "black"
-
-# https://github.com/PyCQA/pydocstyle/issues/418
-[tool.pydocstyle]
-add_ignore = "D205, D400"
-
 [tool.doq]
 template_path = "templates"
 
-[tool.bandit]
-skips = ["B404"]
+[tool.ruff]
+line-length = 79
 
-[tool.bandit.assert_used]
-skips = ["tests/*.py", "*_test.py", "test_*.py"]
+[tool.ruff.lint]
+select = [
+  # pycodestyle
+  "E",
+  # pyflakes
+  "F",
+  # pyupgrade
+  "UP",
+  # flake8-bugbear
+  "B",
+  # flake8-simplify
+  "SIM",
+  # isort
+  "I",
+]
+ignore = ["D205", "D400"]
+preview = true
+
+[tool.ruff.format]
+docstring-code-format = true
+preview = true
 
 [tool.coverage.report]
-exclude_lines = ["if TYPE_CHECKING:", "if __name__ == .__main__.:"]
+exclude_lines = [
+  "if TYPE_CHECKING:",
+  "if __name__ == .__main__.:",
+  "\\s*import tomli as tomllib",
+]

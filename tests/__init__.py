@@ -1,7 +1,9 @@
 """Provide ``AppMixin``."""
+
 import os
 import shutil
 import tempfile
+from contextlib import suppress
 from functools import update_wrapper
 from pathlib import Path
 
@@ -62,11 +64,9 @@ def _find_duplicate_default_nodes():
             self.nodes.add(node.__name__)
 
     app = App()
-    try:
+    # Sphinx 1 doesn't have this
+    with suppress(AttributeError):
         addnodes.setup(app)  # type: ignore
-    except AttributeError:
-        # Sphinx 1 doesn't have this
-        pass
 
     return app.nodes
 
@@ -202,7 +202,6 @@ class AppMixin:
     @Lazy
     def doctree(self):
         """Doctree."""
-        getattr(self, "build_app")
         self.build_app = True  # type: ignore
         app = self.app
         return app.env.get_doctree("content/doc")  # type: ignore

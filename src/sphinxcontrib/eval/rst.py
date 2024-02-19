@@ -3,6 +3,7 @@
 
 Provide ``RSTEvalParser``.
 """
+
 from sphinx.parsers import RSTParser
 
 from .utils import patch_parser

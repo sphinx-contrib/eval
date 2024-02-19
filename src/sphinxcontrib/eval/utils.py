@@ -1,8 +1,9 @@
 """Utilities
 ============
 """
+
 import re
-from typing import Callable, Type
+from typing import Callable
 
 from docutils.nodes import document
 from sphinx.parsers import Parser
@@ -50,7 +51,7 @@ def replace(
     return outputstring
 
 
-def patch_parser(template: str, parser: Type[Parser]) -> Type[Parser]:
+def patch_parser(template: str, parser: type[Parser]) -> type[Parser]:
     """Patch parser.
 
     :param template:

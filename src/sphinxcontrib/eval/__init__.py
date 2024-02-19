@@ -1,6 +1,7 @@
 """Provide ``setup()`` to
 `sphinx <https://www.sphinx-doc.org/en/master/extdev/index.html>`_.
 """
+
 from __future__ import annotations
 
 import io
@@ -12,7 +13,7 @@ from typing import TYPE_CHECKING, Any
 if TYPE_CHECKING:
     from sphinx.application import Sphinx
 
-from ._version import __version__, __version_tuple__  # type: ignore
+from ._version import __version__  # type: ignore
 from .rst import RSTEvalParser
 
 SH = os.getenv("SHELL", "sh")
